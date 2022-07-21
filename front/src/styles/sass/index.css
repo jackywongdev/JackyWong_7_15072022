@@ -1,0 +1,45 @@
+* {
+  margin: 0;
+  padding: 0;
+  border: 0;
+  font-size: 1em;
+  font-weight: normal;
+  font-style: normal;
+  text-decoration: none;
+}
+
+.authentification-page {
+  margin: 0;
+  padding: 0;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100vh;
+}
+
+.log-container {
+  margin: 0;
+  padding: 0;
+  display: flex;
+}
+
+.connection-form {
+  max-width: 400px;
+}
+
+.img-container img {
+  max-width: 400px;
+  margin-left: 50px;
+}
+
+.login-form-button {
+  color: 0;
+}
+
+.messageError {
+  color: red;
+}
+
+.active-btn {
+  list-style: none;
+}/*# sourceMappingURL=index.css.map */

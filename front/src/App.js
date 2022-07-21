@@ -1,24 +1,43 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 import { BrowserRouter, Route, Routes } from "react-router-dom";
 import Account from "./pages/Account";
 import Home from "./pages/Home";
-import Login from "./pages/Login";
 import Profile from "./pages/Profile";
-import Register from "./pages/Register";
+import Anthentification from "./pages/Authentification";
+import { UidContext } from "./components/AppContext";
+import axios from "axios";
 
 const App = () => {
+  const [uid, setUid] = useState(null);
+
+  useEffect(() => {
+    const fetchToken = async () => {
+      await axios({
+        method: "get",
+        url: `${process.env.REACT_APP_API_URL}jwtid`,
+        withCredentials: true,
+      })
+        .then((res) => {
+          console.log(res);
+          setUid(res.data);
+        })
+        .catch((err) => console.log("No Token"));
+    };
+    fetchToken();
+  }, []);
   return (
     <div>
-      <BrowserRouter>
-        <Routes>
-          <Route path="/" element={<Home />} />
-          <Route path="/register" element={<Register />} />
-          <Route path="/login" element={<Login />} />
-          <Route path="/profil/:id" element={<Profile />} />
-          <Route path="/account" element={<Account />} />
-          <Route path="*" element={<Home />} />
-        </Routes>
-      </BrowserRouter>
+      <UidContext.Provider value={uid}>
+        <BrowserRouter>
+          <Routes>
+            <Route path="/" element={<Home />} />
+            <Route path="/auth" element={<Anthentification />} />
+            <Route path="/profil/:id" element={<Profile />} />
+            <Route path="/mon-compte" element={<Account />} />
+            <Route path="*" element={<Home />} />
+          </Routes>
+        </BrowserRouter>
+      </UidContext.Provider>
     </div>
   );
 };
