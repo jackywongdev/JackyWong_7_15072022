@@ -29,6 +29,15 @@
   color: red;
 }
 
-.active-btn {
+.log-btn li {
   list-style: none;
+}
+
+.active-btn {
+  background-color: blue;
+  color: white;
+}
+
+.success {
+  color: green;
 }

@@ -29,7 +29,7 @@ module.exports.signIn = async (req, res) => {
   try {
     const user = await UserModel.login(email, password);
     const token = createToken(user._id);
-    res.cookie("jwt", token, { maxAge: maxAge });
+    res.cookie("jwt", token, { httpOnly: true, maxAge: maxAge });
     res.status(200).json({ user: user._id });
   } catch (err) {
     const errors = signInErrors(err);
@@ -39,5 +39,5 @@ module.exports.signIn = async (req, res) => {
 
 module.exports.logout = (req, res) => {
   res.cookie("jwt", "", { maxAge: 1 });
-  res.redirect("/");
+  res.redirect("/auth");
 };

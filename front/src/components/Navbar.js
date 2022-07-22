@@ -6,14 +6,15 @@ export default function Navbar() {
     <nav>
       <ul className="navbar-container">
         <NavLink to="/">
-          <li className="navbar-titem"> Accueil</li>
+          <li className="navbar-item"> Accueil</li>
         </NavLink>
         <NavLink to="/profil">
-          <li className="navbar-titem">Profil</li>
+          <li className="navbar-item">Profil</li>
         </NavLink>
         <NavLink to="/mon-compte">
-          <li className="navbar-titem">Mes paramètres</li>
+          <li className="navbar-item">Mes paramètres</li>
         </NavLink>
+        <li className="navbar-item">Se deconnecter</li>
       </ul>
     </nav>
   );

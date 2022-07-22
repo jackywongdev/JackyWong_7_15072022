@@ -25,7 +25,7 @@ const SignInForm = () => {
         if (res.data.error) {
           messageError.innerHTML = res.data.error;
         } else {
-          //window.location = "/";
+          window.location = "/";
         }
       })
       .catch((err) => {

@@ -24,7 +24,7 @@ const App = () => {
         .catch((err) => console.log("No Token"));
     };
     fetchToken();
-  }, []);
+  }, [uid]);
   return (
     <div>
       <UidContext.Provider value={uid}>
@@ -32,7 +32,7 @@ const App = () => {
           <Routes>
             <Route path="/" element={<Home />} />
             <Route path="/auth" element={<Anthentification />} />
-            <Route path="/profil/:id" element={<Profile />} />
+            <Route path="/profil" element={<Profile />} />
             <Route path="/mon-compte" element={<Account />} />
             <Route path="*" element={<Home />} />
           </Routes>

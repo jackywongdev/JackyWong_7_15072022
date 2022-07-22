@@ -1,64 +1,127 @@
 import { Button, Form, Input } from "antd";
-import { LockOutlined, UserOutlined } from "@ant-design/icons";
-import React, { useEffect, useState } from "react";
+import React, { useState } from "react";
+import axios from "axios";
+import SignInForm from "./SignInForm";
 
 const SignUpForm = () => {
+  const [formSubmit, setFormSubmit] = useState(false);
   const [pseudo, setPseudo] = useState("");
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
 
-  return (
-    <div className="form-container">
-      <Form
-        name="normal_login"
-        className="login-form"
-        initialValues={{ remember: true }}
-      >
-        <Form.Item
-          name="Votre nom d'utilisateur"
-          rules={[
-            {
-              required: true,
-              message: "Merci de rensseigner votre Nom d'utilisateur!",
-            },
-          ]}
-        >
-          <Input
-            prefix={<UserOutlined className="site-form-item-icon" />}
-            placeholder="Username"
-          />
-        </Form.Item>
-        <Form.Item
-          name="username"
-          rules={[{ required: true, message: "Please input your Username!" }]}
-        >
-          <Input
-            prefix={<UserOutlined className="site-form-item-icon" />}
-            placeholder="Username"
-          />
-        </Form.Item>
-        <Form.Item
-          name="password"
-          rules={[{ required: true, message: "Please input your Password!" }]}
-        >
-          <Input
-            prefix={<LockOutlined className="site-form-item-icon" />}
-            type="password"
-            placeholder="Password"
-          />
-        </Form.Item>
+  const onFinish = (e) => {
+    const messageError = document.querySelector(".messageError");
 
-        <Form.Item>
-          <Button
-            type="primary"
-            htmlType="submit"
-            className="signup-form-button"
+    axios({
+      method: "post",
+      url: `${process.env.REACT_APP_API_URL}api/user/register`,
+      data: {
+        pseudo: pseudo,
+        email: email,
+        password: password,
+      },
+    })
+      .then((res) => {
+        console.log(res);
+        if (res.data.error) {
+          messageError.innerHTML = res.data.error;
+        } else {
+          setFormSubmit(true);
+        }
+      })
+      .catch((err) => {
+        console.log(err);
+      });
+  };
+  const onFinishFailed = (errorInfo) => {
+    console.log("Failed:", errorInfo);
+  };
+
+  return (
+    <>
+      {formSubmit ? (
+        <>
+          <SignInForm />
+          <span></span>
+          <h4 className="success">
+            Enregistrement réussi, veuillez-vous connecter
+          </h4>
+        </>
+      ) : (
+        <div className="form-container">
+          <Form
+            name="basic"
+            labelCol={{
+              span: 8,
+            }}
+            wrapperCol={{
+              span: 16,
+            }}
+            onFinish={onFinish}
+            onFinishFailed={onFinishFailed}
+            autoComplete="off"
           >
-            S'enregistrer
-          </Button>
-        </Form.Item>
-      </Form>
-    </div>
+            <Form.Item
+              label="Nom d'utilisateur"
+              name="pseudo"
+              rules={[
+                {
+                  required: true,
+                  message: "Merci de renseigner votre nom d'utilisateur!",
+                  type: "name",
+                },
+              ]}
+            >
+              <Input
+                onChange={(e) => setPseudo(e.target.value)}
+                value={pseudo}
+              />
+            </Form.Item>
+            <div className="pseudo error"></div>
+            <br />
+            <Form.Item
+              label="Email"
+              name="email"
+              rules={[
+                {
+                  required: true,
+                  message: "Merci de renseigner votre e-mail!",
+                  type: "email",
+                },
+              ]}
+            >
+              <Input onChange={(e) => setEmail(e.target.value)} value={email} />
+            </Form.Item>
+            <div className="email error"></div>
+            <br />
+            <Form.Item
+              label="Mot de passe"
+              name="Votre mot de passe"
+              rules={[
+                {
+                  required: true,
+                  message: "Merci de renseigner votre mot de passe",
+                },
+              ]}
+            >
+              <Input
+                className="site-form-item-icon"
+                onChange={(e) => setPassword(e.target.value)}
+                value={password}
+                type="password"
+              />
+            </Form.Item>
+            <div className="messageError"></div>
+            <br />
+            <Form.Item>
+              <Button block type="primary" htmlType="submit">
+                S'enregister
+              </Button>
+            </Form.Item>
+          </Form>
+        </div>
+      )}
+    </>
   );
 };
 
