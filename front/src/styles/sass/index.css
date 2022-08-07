@@ -44,11 +44,65 @@
   list-style: none;
 }
 
-.active-btn {
-  background-color: blue;
+.success {
+  color: green;
+}
+
+.groupomania-logo {
+  width: 295px;
+}
+
+.ant-layout-header {
+  width: auto;
+  display: flex;
+  flex-direction: row-reverse;
+  padding: 0;
+  margin: 0;
+}
+.ant-layout-header h1 {
+  margin: 0 40px;
+  padding: 0;
   color: white;
 }
 
-.success {
-  color: green;
+.logo-container {
+  display: block;
+  justify-content: center;
+  align-items: center;
+  margin: 0;
+  padding: 10px 25px 0 0;
+  color: white;
+}
+.logo-container p {
+  margin: 0;
+  padding: 0;
+  line-height: 2;
+}
+
+.logout-icon {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin: 0;
+  padding: 0;
+  font-size: 20px;
+  color: white;
+}
+
+.account-content-container {
+  display: flex;
+}
+
+.picture-update-container {
+  display: block;
+  flex-direction: column;
+}
+
+img {
+  width: 235px;
+}
+
+.account-delete-container {
+  display: block;
+  flex-direction: column;
 }/*# sourceMappingURL=index.css.map */

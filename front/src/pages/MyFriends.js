@@ -1,23 +1,22 @@
 import { Layout } from "antd";
 import React, { useContext } from "react";
 import { UidContext } from "../components/AppContext";
-import ProfileContent from "../components/Content/ProfileContent";
+import NavBar from "../components/Navbar";
 import FooterBar from "../components/FooterBar";
-import HeaderBar from "../components/HeaderBar";
-import Navbar from "../components/Navbar";
 import Authentification from "./Authentification";
-
-const Profil = () => {
+import HeaderBar from "../components/HeaderBar";
+import HomeContent from "../components/Content/HomeContent";
+const MyFriends = () => {
   const uid = useContext(UidContext);
   return (
-    <div className="profile-page">
+    <div className="my-friend-page">
       {uid ? (
-        <div className="profil-page">
+        <div className="my-friend-page">
           <Layout style={{ minHeight: "100vh" }}>
-            <Navbar />
+            <NavBar />
             <Layout>
               <HeaderBar />
-              <ProfileContent />
+              <HomeContent />
               <FooterBar />
             </Layout>
           </Layout>
@@ -31,4 +30,4 @@ const Profil = () => {
   );
 };
 
-export default Profil;
+export default MyFriends;

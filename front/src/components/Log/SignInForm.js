@@ -1,4 +1,4 @@
-import { Button, Form, Input } from "antd";
+import { Button } from "antd";
 import React, { useState } from "react";
 import axios from "axios";
 
@@ -7,13 +7,13 @@ const SignInForm = () => {
   const [password, setPassword] = useState("");
 
   const onFinish = (e) => {
-    //e.preventDefault();
-
-    const messageError = document.querySelector(".messageError");
+    e.preventDefault();
+    const emailError = document.querySelector(".email.error");
+    const passwordError = document.querySelector(".password.error");
 
     axios({
       method: "post",
-      url: `${process.env.REACT_APP_API_URL}api/user/login`,
+      url: `${process.env.REACT_APP_API_URL}/api/user/login`,
       withCredentials: true,
       data: {
         email: email,
@@ -22,8 +22,9 @@ const SignInForm = () => {
     })
       .then((res) => {
         console.log(res);
-        if (res.data.error) {
-          messageError.innerHTML = res.data.error;
+        if (res.data.errors) {
+          emailError.innerHTML = res.data.errors.email;
+          passwordError.innerHTML = res.data.errors.password;
         } else {
           window.location = "/";
         }
@@ -33,64 +34,35 @@ const SignInForm = () => {
       });
   };
 
-  const onFinishFailed = (errorInfo) => {
-    console.log("Failed:", errorInfo);
-  };
-
   return (
     <div className="signinform-container">
-      <Form
-        name="basic"
-        labelCol={{
-          span: 8,
-        }}
-        wrapperCol={{
-          span: 16,
-        }}
-        onFinish={onFinish}
-        onFinishFailed={onFinishFailed}
-        autoComplete="off"
-      >
-        <Form.Item
-          label="Email"
+      <form action="" onSubmit={onFinish} id="sign-up-form">
+        <label htmlFor="email">Email</label>
+        <br />
+        <input
+          type="text"
           name="email"
-          rules={[
-            {
-              required: true,
-              message: "Merci de renseigner votre e-mail!",
-              type: "email",
-            },
-          ]}
-        >
-          <Input onChange={(e) => setEmail(e.target.value)} value={email} />
-        </Form.Item>
-        <div className="email error"></div>
+          id="email"
+          onChange={(e) => setEmail(e.target.value)}
+          value={email}
+        />
+        <div className="email error" style={{ color: "red" }}></div>
         <br />
-        <Form.Item
-          label="Mot de passe"
-          name="Votre mot de passe"
-          rules={[
-            {
-              required: true,
-              message: "Merci de renseigner votre mot de passe",
-            },
-          ]}
-        >
-          <Input
-            className="site-form-item-icon"
-            onChange={(e) => setPassword(e.target.value)}
-            value={password}
-            type="password"
-          />
-        </Form.Item>
-        <div className="messageError"></div>
+        <label htmlFor="password">Mot de passe</label>
         <br />
-        <Form.Item>
-          <Button block type="primary" htmlType="submit">
-            Se connecter
-          </Button>
-        </Form.Item>
-      </Form>
+        <input
+          type="password"
+          name="password"
+          id="password"
+          onChange={(e) => setPassword(e.target.value)}
+          value={password}
+        />
+        <div className="password error" style={{ color: "red" }}></div>
+        <br />
+        <Button block type="primary" htmlType="submit">
+          Se connecter
+        </Button>
+      </form>
     </div>
   );
 };

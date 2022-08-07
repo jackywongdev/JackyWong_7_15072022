@@ -1,14 +1,32 @@
-import React from "react";
-import Navbar from "../components/Navbar";
+import { Layout } from "antd";
+import React, { useContext } from "react";
+import { UidContext } from "../components/AppContext";
+import NavBar from "../components/Navbar";
+import FooterBar from "../components/FooterBar";
+import Authentification from "./Authentification";
+import HeaderBar from "../components/HeaderBar";
+import AccountContent from "../components/Content/AccountContent";
 
 const Account = () => {
+  const uid = useContext(UidContext);
   return (
-    <div>
-      <Navbar />
-      <h1>Mon compte</h1>
-      <p>modification du nom d'utilisateur</p>
-      <p>modification de photo</p>
-      <p>supression du compte</p>
+    <div className="account-page">
+      {uid ? (
+        <div className="account-container">
+          <Layout style={{ minHeight: "100vh" }}>
+            <NavBar />
+            <Layout>
+              <HeaderBar />
+              <AccountContent />
+              <FooterBar />
+            </Layout>
+          </Layout>
+        </div>
+      ) : (
+        <div className="log-page">
+          <Authentification />
+        </div>
+      )}
     </div>
   );
 };

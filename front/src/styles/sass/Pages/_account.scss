@@ -1,0 +1,16 @@
+.account-content-container {
+  display: flex;
+}
+
+.picture-update-container {
+  display: block;
+  flex-direction: column;
+}
+img {
+  width: 235px;
+}
+
+.account-delete-container {
+  display: block;
+  flex-direction: column;
+}
