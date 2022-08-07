@@ -10,7 +10,7 @@ router.get("/logout", authController.logout);
 //user
 router.get("/", userController.getAllUsers);
 router.get("/:id", userController.userInfo);
-router.put("/:id", multer, userController.updateUser);
+router.put("/upload", multer, userController.updateUserPicture);
 router.delete("/:id", userController.deleteUser);
 router.patch("/follow/:id", userController.follow);
 router.patch("/unfollow/:id", userController.unfollow);

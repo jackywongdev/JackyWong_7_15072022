@@ -21,22 +21,25 @@ export default function AccountContent() {
 
         <div className="account-content-container">
           <div className="picture-update-container">
-            <div className="picture-container">
-              <p>Changer ma photo de profil</p>
-              <img src={userData.picture} alt="avatar utilisateur" />
-            </div>
             <div className="upload-picture-container">
-              <UploadPicture />
+              <div className="left-container">
+                <h1>Photo de profil</h1>
+                <img src={userData.picture} alt="avatar utilisateur" />
+                <img src="" alt="" />
+                <UploadPicture />
+              </div>
+              <div className="right-container">
+                <div className="account-delete-container">
+                  <div>
+                    <p>modifier mon nom d'utilisateur</p>
+                    <input type="text" />
+                  </div>
+                  <Button danger type="file">
+                    Supprimer mon Compte
+                  </Button>
+                </div>
+              </div>
             </div>
-          </div>
-          <div className="account-delete-container">
-            <div>
-              <p>modifier mon nom d'utilisateur</p>
-              <input type="text" />
-            </div>
-            <Button danger type="file">
-              Supprimer mon Compte
-            </Button>
           </div>
         </div>
       </Content>

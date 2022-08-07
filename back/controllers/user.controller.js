@@ -18,21 +18,16 @@ module.exports.userInfo = (req, res) => {
   }).select("-password");
 };
 
-module.exports.updateUser = async (req, res) => {
-  if (!ObjectID.isValid(req.params.id))
-    return res.status(400).send("ID unknown : " + req.params.id);
-
+module.exports.updateUserPicture = async (req, res) => {
   try {
     const userObject = req.file
       ? {
-          picture: `${req.protocol}://${req.get("host")}/images/profil/${
-            req.file.filename
-          }`,
+          picture: `./images/profil/${req.file.filename}`,
         }
       : { ...req.body };
 
     await UserModel.findOneAndUpdate(
-      { _id: req.params.id },
+      { _id: req.body._id },
       { $set: { ...userObject } },
       { new: true, upsert: true },
       (err, docs) => {

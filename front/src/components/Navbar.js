@@ -27,16 +27,16 @@ export default function Navbar() {
             <span>Accueil</span>
             <Link to="/accueil" />
           </Menu.Item>
-          <Menu.Item key="2">
+          <Menu.Item key="2" activeClassName="is-active">
             <UsergroupDeleteOutlined />
             <span>Mes amis</span>
             <Link to="/amis" />
           </Menu.Item>
-          <Menu.Item key="3">
+          <Menu.Item key="3" activeClassName="is-active">
             <span>Mon Profil</span>
             <Link to="/profil:id" />
           </Menu.Item>
-          <Menu.Item key="4">
+          <Menu.Item key="4" activeClassName="is-active">
             <ToolOutlined />
             <span>Mon Compte</span>
             <Link to="/mon-compte" />

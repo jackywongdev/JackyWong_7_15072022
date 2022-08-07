@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { getPosts } from "../../actions/post.actions";
+import CardThread from "./Card";
 
 const Thread = () => {
   const [loadPost, setLoadPost] = useState(true);
@@ -19,12 +20,7 @@ const Thread = () => {
       <ul>
         {posts[0] &&
           posts.map((post) => {
-            return (
-              <div className="post">
-                <li>{post._id}</li>
-                <li>{post.message}</li>
-              </div>
-            );
+            return <CardThread posts={posts} key={post._id} />;
           })}
       </ul>
     </div>
