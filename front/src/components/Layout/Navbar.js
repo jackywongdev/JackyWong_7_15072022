@@ -1,20 +1,51 @@
-import {
-  ToolOutlined,
-  HomeOutlined,
-  UsergroupDeleteOutlined,
-} from "@ant-design/icons";
 import { Layout, Menu } from "antd";
-
 import React from "react";
+import { useLocation } from "react-router-dom";
+import { HomeOutlined, ToolOutlined, TeamOutlined } from "@ant-design/icons";
 import { Link } from "react-router-dom";
-import groupomaniaLogo from "../assets/groupomania/logo.png";
 
 const { Sider } = Layout;
 
-export default function Navbar() {
+const NavBar = () => {
+  const location = useLocation();
+
   return (
-    <div className="home-page-container">
-      <Sider trigger={null}>
+    <Sider style={{ backgroundColor: "white" }}>
+      <img
+        src="./images/groupomania/logo.png"
+        alt="logo banière groupomania"
+        className="groupomania-logo"
+      />
+      <Menu
+        theme="light"
+        mode="inline"
+        defaultSelectedKeys={[location.pathname]}
+      >
+        <Menu.Item key="/">
+          <HomeOutlined />
+          <span>Acceuil</span>
+          <Link to="/"></Link>
+        </Menu.Item>
+
+        <Menu.Item key="/profil">
+          <TeamOutlined />
+          <span>Mon Profil</span>
+          <Link to="/profil"></Link>
+        </Menu.Item>
+
+        <Menu.Item key="/mon-comtpe">
+          <ToolOutlined />
+          <span>Mon Compte</span>
+          <Link to="/mon-compte"></Link>
+        </Menu.Item>
+      </Menu>
+    </Sider>
+  );
+};
+
+export default NavBar;
+/*
+<Sider trigger={null}>
         <div className="groupomania-logo-container" />
         <img
           className="groupomania-logo"
@@ -43,6 +74,5 @@ export default function Navbar() {
           </Menu.Item>
         </Menu>
       </Sider>
-    </div>
-  );
-}
+
+*/

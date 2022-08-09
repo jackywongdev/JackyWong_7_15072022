@@ -1,14 +1,26 @@
+// React
 import React, { useEffect, useState } from "react";
-import { BrowserRouter, Route, Routes } from "react-router-dom";
+import { Route, Routes } from "react-router-dom";
+import { UidContext } from "./components/AppContext";
+
+// Layout
+import NavBar from "./components/Layout/Navbar";
+import HeaderBar from "./components/Layout/HeaderBar";
+import { Content } from "antd/lib/layout/layout";
+import { Layout } from "antd";
+
+// Page
+import Home from "./pages/Home";
 import Account from "./pages/Account";
 import Profile from "./pages/Profile";
-import Anthentification from "./pages/Authentification";
-import { UidContext } from "./components/AppContext";
-import axios from "axios";
-import MyFriends from "./pages/MyFriends";
-import Home from "./pages/Home";
+import Authentification from "./pages/Authentification";
+
+// Redux
 import { useDispatch } from "react-redux";
 import { getUser } from "./actions/user.actions";
+
+// Dependencies
+import axios from "axios";
 
 const App = () => {
   const [uid, setUid] = useState(null);
@@ -30,20 +42,32 @@ const App = () => {
     if (uid) dispatch(getUser(uid));
   }, [uid, dispatch]);
   return (
-    <div>
+    <>
       <UidContext.Provider value={uid}>
-        <BrowserRouter>
-          <Routes>
-            <Route path="/" element={<Home />} />
-            <Route path="/auth" element={<Anthentification />} />
-            <Route path="/profil:id" element={<Profile />} />
-            <Route path="/mon-compte" element={<Account />} />
-            <Route path="/amis" element={<MyFriends />} />
-            <Route path="*" element={<Home />} />
-          </Routes>
-        </BrowserRouter>
+        <Layout>
+          <NavBar />
+          <Layout>
+            <HeaderBar />
+            <Content
+              style={{
+                margin: "24px 16px",
+                padding: 24,
+                background: "#fff",
+                minHeight: 280,
+              }}
+            >
+              <Routes>
+                <Route path="/" element={<Home />} />
+                <Route path="/auth" element={<Authentification />} />
+                <Route path="/profil" element={<Profile />} />
+                <Route path="/mon-compte" element={<Account />} />
+                <Route path="*" element={<Home />} />
+              </Routes>
+            </Content>
+          </Layout>
+        </Layout>
       </UidContext.Provider>
-    </div>
+    </>
   );
 };
 

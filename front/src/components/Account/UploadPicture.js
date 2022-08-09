@@ -1,3 +1,4 @@
+import { Form, Upload } from "antd";
 import React, { useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 
@@ -21,7 +22,7 @@ const UploadPicture = () => {
   return (
     <>
       <form action="" className="upload-pic" on onSubmit={handlePicture}>
-        <label htmlFor="file">Changer de photo de profil</label>
+        <label htmlFor="file"></label>
         <input
           type="file"
           id="file"
@@ -32,6 +33,10 @@ const UploadPicture = () => {
         <br />
         <input type="submit" value="Envoyer" />
       </form>
+
+      <Form>
+        <Upload>upload</Upload>
+      </Form>
     </>
   );
 };

@@ -1,7 +1,8 @@
 import React, { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { getPosts } from "../../actions/post.actions";
-import CardThread from "./Card";
+import Card from "./Card";
+import { isEmpty } from "../../pages/Utils";
 
 const Thread = () => {
   const [loadPost, setLoadPost] = useState(true);
@@ -18,9 +19,9 @@ const Thread = () => {
   return (
     <div className="thread-container">
       <ul>
-        {posts[0] &&
+        {!isEmpty(posts[0]) &&
           posts.map((post) => {
-            return <CardThread posts={posts} key={post._id} />;
+            return <Card posts={posts} key={post._id} />;
           })}
       </ul>
     </div>

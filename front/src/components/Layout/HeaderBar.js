@@ -4,6 +4,7 @@ import { Header } from "antd/lib/layout/layout";
 import { useSelector } from "react-redux";
 import cookie from "js-cookie";
 import axios from "axios";
+import { Avatar } from "antd";
 
 export default function HeaderBar() {
   const removeCookie = (key) => {
@@ -31,6 +32,7 @@ export default function HeaderBar() {
           <p>Se déconnecter</p>
         </div>
         <div className="welcome-container">
+          <Avatar size="large" src={userData.picture} />
           <h1>Bienvenue {userData.pseudo}</h1>
         </div>
       </Header>

@@ -1,5 +1,16 @@
-.account-content-container {
+.account-container {
   display: flex;
+  justify-content: center;
+  justify-items: center;
+}
+h1 {
+  justify-content: center;
+  justify-items: center;
+}
+
+.left-container {
+  display: block;
+  flex-direction: column;
 }
 
 .picture-update-container {
@@ -7,10 +18,18 @@
   flex-direction: column;
 }
 img {
-  width: 235px;
+  width: 400px;
 }
 
 .account-delete-container {
+  display: block;
+  flex-direction: column;
+}
+.delete-image {
+  width: 200px;
+}
+
+.upload-pic {
   display: block;
   flex-direction: column;
 }

@@ -1,20 +1,12 @@
 import React from "react";
-import { Content } from "antd/lib/layout/layout";
-import Thread from "../Home/Thread";
+import Thread from "../Post/Thread";
 
-export default function HomeContent() {
+const HomeContent = () => {
   return (
-    <>
-      <Content
-        style={{
-          margin: "24px 16px",
-          padding: 24,
-          background: "#fff",
-          minHeight: 280,
-        }}
-      >
-        <Thread />
-      </Content>
-    </>
+    <div>
+      <Thread />
+    </div>
   );
-}
+};
+
+export default HomeContent;
