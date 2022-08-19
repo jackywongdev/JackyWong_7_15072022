@@ -10,13 +10,10 @@ export default function AccountContent() {
   return (
     <>
       <div className="account-container">
-        <h1>Profil de {userData.pseudo}</h1>
         <div className="left-container">
           <div>
-            <h1>Photo de profil</h1>
-          </div>
-          <div>
-            <img src={userData.picture} alt="avatar utilisateur" />
+            <h1>Photo de profil {userData.pseudo}</h1>
+            <img src={userData.picture} alt="user" />
           </div>
           <UploadPicture />
         </div>
@@ -31,10 +28,7 @@ export default function AccountContent() {
                 alt="suprimer mon compte"
               />
             </div>
-            <Button icon={<WarningOutlined />}>Supprimer mon Compte</Button>{" "}
-            <Button type="primary" danger>
-              Primary
-            </Button>
+            <Button icon={<WarningOutlined />}>Supprimer mon Compte</Button>
           </div>
         </div>
       </div>

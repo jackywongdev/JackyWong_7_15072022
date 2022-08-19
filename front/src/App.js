@@ -17,7 +17,7 @@ import Authentification from "./pages/Authentification";
 
 // Redux
 import { useDispatch } from "react-redux";
-import { getUser } from "./actions/user.actions";
+import { getUser } from "./redux/actions/user.actions";
 
 // Dependencies
 import axios from "axios";
@@ -45,26 +45,26 @@ const App = () => {
     <>
       <UidContext.Provider value={uid}>
         <Layout>
+          <HeaderBar />
           <NavBar />
-          <Layout>
-            <HeaderBar />
-            <Content
-              style={{
-                margin: "24px 16px",
-                padding: 24,
-                background: "#fff",
-                minHeight: 280,
-              }}
-            >
-              <Routes>
-                <Route path="/" element={<Home />} />
-                <Route path="/auth" element={<Authentification />} />
-                <Route path="/profil" element={<Profile />} />
-                <Route path="/mon-compte" element={<Account />} />
-                <Route path="*" element={<Home />} />
-              </Routes>
-            </Content>
-          </Layout>
+
+          <Content
+            style={{
+              margin: "24px 16px",
+              padding: 24,
+              background: "#fff",
+              minHeight: 280,
+            }}
+          >
+            <Routes>
+              <Route path="/auth" element={<Authentification />} />
+              <Route path="/" element={<Home />} />
+              <Route path="/profil" element={<Profile />} />
+              <Route path="/mon-compte" element={<Account />} />
+              <Route path="*" element={<Home />} />
+            </Routes>
+          </Content>
+          <Layout></Layout>
         </Layout>
       </UidContext.Provider>
     </>

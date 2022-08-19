@@ -1,6 +1,10 @@
 @import "./Base/reset";
+@import "./Utils/utils";
 @import "./Mixin/mixin";
 @import "./Pages/auth";
 @import "./Pages/home";
 @import "./Pages/header";
 @import "./Pages/account";
+@import "./Composants/card";
+@import "./Composants/newpostform";
+@import "./Layout/navbar";

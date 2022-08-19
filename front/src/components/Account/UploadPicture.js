@@ -1,8 +1,7 @@
-import { Form, Upload } from "antd";
 import React, { useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 
-import { uploadPicture } from "../../actions/user.actions";
+import { uploadPicture } from "../../redux/actions/user.actions";
 
 const UploadPicture = () => {
   const [file, setFile] = useState();
@@ -12,16 +11,16 @@ const UploadPicture = () => {
   const handlePicture = (e) => {
     e.preventDefault();
     const data = new FormData();
-    data.append("name", userData.pseudo);
+    data.append("pseudo", userData.pseudo);
     data.append("_id", userData._id);
     data.append("file", file);
 
-    dispatch(uploadPicture(data, userData._id));
+    dispatch(uploadPicture(data, userData._id, userData.pseudo));
   };
 
   return (
     <>
-      <form action="" className="upload-pic" on onSubmit={handlePicture}>
+      <form action="" className="upload-pic" onSubmit={handlePicture}>
         <label htmlFor="file"></label>
         <input
           type="file"
@@ -33,10 +32,6 @@ const UploadPicture = () => {
         <br />
         <input type="submit" value="Envoyer" />
       </form>
-
-      <Form>
-        <Upload>upload</Upload>
-      </Form>
     </>
   );
 };

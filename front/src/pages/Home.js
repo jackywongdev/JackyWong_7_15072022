@@ -5,10 +5,13 @@ import HomeContent from "../components/Content/HomeContent";
 
 const Home = () => {
   const uid = useContext(UidContext);
+
   return (
     <div className="main-page">
       {uid ? (
-        <HomeContent />
+        <>
+          <HomeContent />
+        </>
       ) : (
         <div className="log-page">
           <Authentification />

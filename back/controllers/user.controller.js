@@ -3,7 +3,7 @@ const ObjectID = require("mongoose").Types.ObjectId;
 const fs = require("fs");
 require("dotenv").config();
 
-module.exports.getAllUsers = async (req, res) => {
+module.exports.getUsers = async (req, res) => {
   const users = await UserModel.find().select("-password");
   res.status(200).json(users);
 };
@@ -21,9 +21,7 @@ module.exports.userInfo = (req, res) => {
 module.exports.updateUserPicture = async (req, res) => {
   try {
     const userObject = req.file
-      ? {
-          picture: `./images/profil/${req.file.filename}`,
-        }
+      ? { picture: `./images/profil/${req.file.filename}` }
       : { ...req.body };
 
     await UserModel.findOneAndUpdate(

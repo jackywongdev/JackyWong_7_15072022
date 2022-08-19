@@ -8,9 +8,9 @@ const Account = () => {
   return (
     <div className="account-page">
       {uid ? (
-        <div className="account-container">
+        <>
           <AccountContent />
-        </div>
+        </>
       ) : (
         <div className="log-page">
           <Authentification />

@@ -8,9 +8,9 @@ const Profile = () => {
   return (
     <div className="profile-page">
       {uid ? (
-        <div className="profil-page">
+        <>
           <ProfileContent />
-        </div>
+        </>
       ) : (
         <div className="log-page">
           <Authentification />
