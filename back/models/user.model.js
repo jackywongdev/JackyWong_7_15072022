@@ -29,11 +29,10 @@ const userSchema = new mongoose.Schema(
       type: String,
       default: "./uploads/profil/random-user.png",
     },
-    followers: {
-      type: [String],
-    },
-    following: {
-      type: [String],
+    isAdmin: {
+      type: Boolean,
+      required: true,
+      default: false,
     },
     likes: {
       type: [String],

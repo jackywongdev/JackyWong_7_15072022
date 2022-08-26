@@ -5,8 +5,8 @@ import LikeButton from "./LikeButton";
 import { updatePost } from "../../../redux/actions/post.actions";
 import DeleteCard from "./DeleteCard";
 import CardComments from "./CardComments";
-
-const CardClone = ({ post }) => {
+import { Spin } from "antd";
+const Card = ({ post }) => {
   const [isLoading, setIsLoading] = useState(true);
   const [isUpdated, setIsUpdated] = useState(false);
   const [textUpdate, setTextUpdate] = useState(null);
@@ -17,7 +17,7 @@ const CardClone = ({ post }) => {
 
   const updateItem = () => {
     if (textUpdate) {
-      dispatch(updatePost(post._id, textUpdate));
+      dispatch(updatePost(post, textUpdate));
     }
     setIsUpdated(false);
   };
@@ -27,21 +27,16 @@ const CardClone = ({ post }) => {
   }, [usersData]);
 
   return (
-    <li className="card-container" key={post._id}>
+    <li className="card-container" key={post.posterId}>
       {isLoading ? (
-        <i className="fas fa-spinner fa-spin"></i>
+        <Spin />
       ) : (
         <>
           <div className="card-left">
             <img
               src={
                 !isEmpty(usersData[0]) &&
-                usersData
-                  .map((user) => {
-                    if (user._id === post.posterId) return user.picture;
-                    else return null;
-                  })
-                  .join("")
+                usersData.find((user) => user._id === post.posterId).picture
               }
               alt="poster-pic"
             />
@@ -85,13 +80,15 @@ const CardClone = ({ post }) => {
                 title={post._id}
               ></iframe>
             )}
-            {userData._id === post.posterId && (
+            {userData.isAdmin === true || userData._id === post.posterId ? (
               <div className="button-container">
                 <div onClick={() => setIsUpdated(!isUpdated)}>
                   <img src="./images/icons/edit.svg" alt="edit" />
                 </div>
                 <DeleteCard id={post._id} />
               </div>
+            ) : (
+              ""
             )}
             <div className="card-footer">
               <div className="comment-icon">
@@ -112,4 +109,4 @@ const CardClone = ({ post }) => {
   );
 };
 
-export default CardClone;
+export default Card;

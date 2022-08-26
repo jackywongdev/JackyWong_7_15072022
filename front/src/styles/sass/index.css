@@ -14,28 +14,28 @@ body {
   min-height: 100%;
 }
 
-.authentification-page {
-  margin: 0;
-  padding: 0;
-  display: flex;
-  justify-content: center;
-  height: 100vh;
+.ant-layout-content {
+  display: block;
+  margin: auto;
 }
 
 .log-container {
-  margin: 0;
-  padding: 0;
   display: flex;
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  margin-right: -50%;
+  transform: translate(-50%, -50%);
 }
-@media screen and (max-width: 800px) {
+@media screen and (max-width: 644px) {
   .log-container {
     display: block;
-    right: 10px;
   }
 }
 
 .connection-form {
   max-width: 400px;
+  margin-top: 50px;
 }
 @media screen and (max-width: 800px) {
   .connection-form {
@@ -47,9 +47,24 @@ body {
   max-width: 400px;
   margin-left: 50px;
 }
+@media screen and (max-width: 800px) {
+  .img-container img {
+    display: none;
+  }
+}
 
 .login-form-button {
   color: 0;
+}
+
+#sign-up-form input {
+  width: 100%;
+  text-align: center;
+}
+@media screen and (max-width: 644px) {
+  #sign-up-form input label {
+    text-align: center;
+  }
 }
 
 .messageError {
@@ -64,8 +79,9 @@ body {
   color: green;
 }
 
-.groupomania-logo {
-  width: 295px;
+.home-container {
+  display: block;
+  position: inherit;
 }
 
 .ant-layout-header {
@@ -76,7 +92,7 @@ body {
   margin: 0;
 }
 .ant-layout-header h1 {
-  margin: 0 40px;
+  margin-right: 70px;
   padding: 0;
   color: white;
 }
@@ -111,42 +127,48 @@ body {
   align-items: center;
 }
 
+.account-page {
+  display: flex;
+}
+
 .account-container {
   display: flex;
-  justify-content: space-around;
   justify-items: center;
   margin: auto;
 }
-
-h1 {
+@media screen and (max-width: 632px) {
+  .account-container {
+    display: block;
+  }
+}
+.account-container h1 {
   justify-content: center;
   justify-items: center;
 }
-
-.left-container {
+.account-container .left-container {
+  display: block;
+  justify-content: center;
+  flex-direction: column;
+}
+.account-container .left-container img {
+  width: 200px;
+  justify-content: center;
+}
+.account-container .picture-update-container {
   display: block;
   flex-direction: column;
 }
-
-.picture-update-container {
+.account-container .account-delete-container {
   display: block;
   flex-direction: column;
 }
-
-img {
-  width: 400px;
-}
-
-.account-delete-container {
-  display: block;
-  flex-direction: column;
-}
-
-.delete-image {
+.account-container .account-delete-container img {
   width: 200px;
 }
-
-.upload-pic {
+.account-container .delete-image {
+  width: 350px;
+}
+.account-container .upload-pic {
   display: block;
   flex-direction: column;
 }
@@ -200,6 +222,11 @@ img {
     transform: translate(17px, 18px);
   }
 }
+.card-container .card-right {
+  width: 550px;
+  max-width: 550px;
+  word-wrap: break-word;
+}
 @media screen and (max-width: 590px) {
   .card-container .card-right {
     margin-left: 18px;
@@ -210,6 +237,7 @@ img {
   justify-content: space-between;
   margin: 2px 0 4px;
   min-height: 35px;
+  max-width: 550px;
 }
 @media screen and (max-width: 590px) {
   .card-container .card-right .card-header {
@@ -223,6 +251,7 @@ img {
 }
 .card-container .card-right .card-header .pseudo {
   display: flex;
+  justify-content: space-around;
   margin-left: 15px;
   font-size: 1.1rem;
 }
@@ -272,7 +301,7 @@ img {
   }
 }
 .card-container .card-right p {
-  margin: 3px 0 9px;
+  margin: 3px 15px 9px;
   font-size: 1rem;
 }
 @media screen and (max-width: 440px) {
@@ -294,12 +323,13 @@ img {
 .card-container .card-right .update-post .button-container .btn:hover {
   background: #030852;
   width: 250px;
+  color: white;
   letter-spacing: 1px;
 }
 .card-container .card-right .card-pic {
   width: 100%;
   border-radius: 6px;
-  margin-top: 12px;
+  margin-bottom: 15px;
   box-shadow: 0 0 3px rgba(51, 51, 51, 0.342);
 }
 .card-container .card-right iframe {
@@ -326,7 +356,6 @@ img {
 .card-container .card-right .button-container div img {
   height: 16px;
   width: 16px;
-  transform: translateY(3px);
 }
 .card-container .card-right .card-footer {
   display: flex;
@@ -348,6 +377,7 @@ img {
 .card-container .card-right .card-footer .like-container {
   display: flex;
   align-items: center;
+  margin-right: 26px;
 }
 .card-container .card-right .card-footer .comment-icon span,
 .card-container .card-right .card-footer .like-container span {
@@ -406,6 +436,7 @@ img {
   width: 15px;
 }
 .card-container .card-right .comment-container .comment-header span {
+  margin-right: 5px;
   font-size: 0.9rem;
   font-style: italic;
   font-family: "font-1", sans-serif;
@@ -432,8 +463,8 @@ img {
   margin-top: 14px;
 }
 .card-container .card-right .comment-container .edit-comment .edit-comment-form label {
-  background: rgb(253, 253, 253);
-  color: #030852;
+  background: #adc6ff;
+  color: rgb(40, 40, 40);
   padding: 6px 12px 5px;
   border-radius: 20px 20px 20px 6px;
   cursor: pointer;
@@ -442,6 +473,8 @@ img {
   font-family: "font-3", serif;
 }
 .card-container .card-right .comment-container .edit-comment .edit-comment-form label:hover {
+  background-color: #030852;
+  color: white;
   transform: scale(1.05);
 }
 .card-container .card-right .comment-container .edit-comment .edit-comment-form input[type=text] {
@@ -473,11 +506,13 @@ img {
 }
 .card-container .card-right .comment-container .edit-comment .edit-comment-form .btn input[type=submit] {
   background: #adc6ff;
+  color: black;
   width: inherit;
   transition: 0.2s;
 }
 .card-container .card-right .comment-container .edit-comment .edit-comment-form .btn input[type=submit]:hover {
   width: inherit;
+  color: white;
   background: #030852;
 }
 .card-container .card-right .comment-form {
@@ -504,6 +539,7 @@ img {
 }
 .card-container .card-right .comment-form input[type=submit]:hover {
   background: #030852;
+  color: white;
   letter-spacing: 2px;
   width: 130px;
 }
@@ -530,6 +566,10 @@ img {
 .card-container .update-post .button-container {
   text-align: right;
 }
+.card-container .update-post .button-container img:hover {
+  background-color: #030852;
+  color: white;
+}
 .card-container .update-post .button-container button {
   margin: 0;
   margin-left: 5px;
@@ -545,7 +585,7 @@ img {
   padding: 16px 40px;
   border-radius: 20px;
   position: relative;
-  background: #fdeeee;
+  background: #adc6ff;
 }
 .post-container i {
   font-size: 1.5rem;
@@ -574,7 +614,7 @@ img {
   margin-bottom: 10px;
 }
 .post-container .user-info img {
-  border-radius: 20px;
+  border-radius: 50%;
   height: 60px;
   width: 60px;
   box-shadow: 2px 2px 2px rgba(51, 51, 51, 0.16);
@@ -588,7 +628,8 @@ img {
   margin: 0 auto 0;
 }
 .post-container .post-form textarea {
-  height: 62px;
+  resize: none;
+  height: auto;
   width: 100%;
   font-size: 1.4rem;
   padding: 12px 15px;
@@ -650,6 +691,7 @@ img {
   text-align: left;
   margin: 2px 0 6px;
   font-size: 1.1rem;
+  word-wrap: break-word;
 }
 .post-container .post-form .card-container .card-right .content img {
   width: 100%;
@@ -673,6 +715,9 @@ img {
   width: 30px;
   height: 20px;
 }
+.post-container .post-form .footer-form .icon .delete-video:hover {
+  color: white;
+}
 .post-container .post-form .footer-form .icon img {
   position: absolute;
   height: 24px;
@@ -682,11 +727,12 @@ img {
 .post-container .post-form .footer-form .icon button {
   width: 190px;
   padding: 10px 20px;
-  background: rgb(253, 253, 253);
+  background: #adc6ff;
   transition: 0.2s;
 }
 .post-container .post-form .footer-form .icon button:hover {
   background: rgb(0, 22, 44);
+  color: white;
 }
 .post-container .post-form .footer-form .icon input {
   width: 25px;
@@ -705,6 +751,7 @@ img {
   color: red;
 }
 .post-container .post-form .footer-form .btn-send .cancel {
+  padding: 5px;
   border-radius: 20px;
   margin-right: 8px;
   background: rgb(253, 253, 253);
@@ -712,9 +759,11 @@ img {
 .post-container .post-form .footer-form .btn-send .cancel:hover {
   color: #fdeeee;
   background: rgb(0, 22, 44);
+  cursor: pointer;
 }
 .post-container .post-form .footer-form .btn-send .send:hover {
   letter-spacing: 2px;
+  cursor: pointer;
 }
 @media screen and (max-width: 460px) {
   .post-container .post-form .footer-form .btn-send button {
@@ -724,5 +773,6 @@ img {
 }
 
 .navbar-menu {
-  width: 250px;
+  position: relative;
+  height: 0;
 }/*# sourceMappingURL=index.css.map */

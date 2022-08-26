@@ -1,4 +1,5 @@
 const UserModel = require("../models/user.model");
+const PostModem = require("../models/post.model");
 const ObjectID = require("mongoose").Types.ObjectId;
 const fs = require("fs");
 require("dotenv").config();
@@ -42,7 +43,15 @@ module.exports.deleteUser = async (req, res) => {
   if (!ObjectID.isValid(req.params.id))
     return res.status(400).send("ID unknown: " + req.params.id);
 
-  await UserModel.findById({ _id: req.params.id }).then((user) => {
+  await PostModel.find({ posterId: req.body.id });
+  PostModel.deleteMany({ posterId: req.body.id })
+    .then((res) => {
+      console.log(res);
+      res.status(200).json({ message: "Posts Supprimé" });
+    })
+    .catch((err) => console.log(err));
+
+  UserModel.findById({ _id: req.params.id }).then((user) => {
     const filename = user.picture.split("/images/profil/")[1];
     fs.unlink(`images/profil/${filename}`, () => {
       UserModel.deleteOne({ _id: req.params.id }).exec();

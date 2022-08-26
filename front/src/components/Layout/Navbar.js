@@ -38,6 +38,7 @@ const NavBar = () => {
             mode="inline"
             defaultSelectedKeys={[location.pathname]}
             inlineCollapsed={collapsed}
+            style={{ width: "170px" }}
           >
             <Menu.Item key="/">
               <HomeOutlined />

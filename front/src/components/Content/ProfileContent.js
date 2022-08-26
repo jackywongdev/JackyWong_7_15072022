@@ -1,14 +1,10 @@
 import React from "react";
+import ProfileThread from "../Profile/ProfileThread";
 
 export default function ProfileContent() {
   return (
     <>
-      <h1>Quoi de neuf</h1>
-
-      <div>Mon fil d'actualité</div>
-      <br />
-      <p>Ma photo de profil</p>
-      <img src="" alt="" />
+      <ProfileThread />
     </>
   );
 }

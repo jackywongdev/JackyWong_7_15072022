@@ -9,9 +9,9 @@ const Home = () => {
   return (
     <div className="main-page">
       {uid ? (
-        <>
+        <div className="home-container">
           <HomeContent />
-        </>
+        </div>
       ) : (
         <div className="log-page">
           <Authentification />

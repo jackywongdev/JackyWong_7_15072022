@@ -45,26 +45,25 @@ const App = () => {
     <>
       <UidContext.Provider value={uid}>
         <Layout>
-          <HeaderBar />
-          <NavBar />
-
-          <Content
-            style={{
-              margin: "24px 16px",
-              padding: 24,
-              background: "#fff",
-              minHeight: 280,
-            }}
-          >
-            <Routes>
-              <Route path="/auth" element={<Authentification />} />
-              <Route path="/" element={<Home />} />
-              <Route path="/profil" element={<Profile />} />
-              <Route path="/mon-compte" element={<Account />} />
-              <Route path="*" element={<Home />} />
-            </Routes>
-          </Content>
-          <Layout></Layout>
+          <Layout>
+            <HeaderBar />
+            <NavBar />
+            <Content
+              style={{
+                margin: "24px 16px",
+                padding: 24,
+                background: "#fff",
+              }}
+            >
+              <Routes>
+                <Route path="/auth" element={<Authentification />} />
+                <Route path="/" element={<Home />} />
+                <Route path="/profil" element={<Profile />} />
+                <Route path="/mon-compte" element={<Account />} />
+                <Route path="*" element={<Home />} />
+              </Routes>
+            </Content>
+          </Layout>
         </Layout>
       </UidContext.Provider>
     </>

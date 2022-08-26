@@ -4,7 +4,7 @@
   padding: 16px 40px;
   border-radius: 20px;
   position: relative;
-  background: $color-4;
+  background: $color-2;
 
   i {
     font-size: 1.5rem;
@@ -32,7 +32,7 @@
   .user-info {
     margin-bottom: 10px;
     img {
-      border-radius: 20px;
+      border-radius: 50%;
       height: 60px;
       width: 60px;
       box-shadow: 2px 2px 2px rgba(51, 51, 51, 0.16);
@@ -47,7 +47,8 @@
     margin: 0 auto 0;
 
     textarea {
-      height: 62px;
+      resize: none;
+      height: auto;
       width: 100%;
       font-size: 1.4rem;
       padding: 12px 15px;
@@ -101,6 +102,7 @@
             text-align: left;
             margin: 2px 0 6px;
             font-size: 1.1rem;
+            word-wrap: break-word;
           }
           img {
             width: 100%;
@@ -125,6 +127,10 @@
         width: 30px;
         height: 20px;
 
+        .delete-video:hover {
+          color: white;
+        }
+
         img {
           position: absolute;
           height: 24px;
@@ -135,11 +141,12 @@
         button {
           width: 190px;
           padding: 10px 20px;
-          background: $white;
+          background: $color-2;
           transition: 0.2s;
 
           &:hover {
             background: $color-3;
+            color: white;
           }
         }
 
@@ -163,6 +170,7 @@
       }
       .btn-send {
         .cancel {
+          padding: 5px;
           border-radius: 20px;
           margin-right: 8px;
           background: $white;
@@ -170,11 +178,13 @@
           &:hover {
             color: $color-4;
             background: $color-3;
+            cursor: pointer;
           }
         }
         .send {
           &:hover {
             letter-spacing: 2px;
+            cursor: pointer;
           }
         }
         button {

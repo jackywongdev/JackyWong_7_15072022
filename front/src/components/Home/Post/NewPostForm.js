@@ -125,7 +125,9 @@ const NewPostForm = () => {
                   </>
                 )}
                 {video && (
-                  <button onClick={() => setVideo("")}>Supprimer video</button>
+                  <button className="delete-video" onClick={() => setVideo("")}>
+                    Supprimer video
+                  </button>
                 )}
               </div>
               {!isEmpty(error.format) && <p>{error.format}</p>}

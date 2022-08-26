@@ -12,6 +12,13 @@ module.exports.readPost = (req, res) => {
   }).sort({ createdAt: -1 });
 };
 
+module.exports.readUserPosts = (req, res) => {
+  PostModel.find({ posterId: req.body.posterId }, (err, docs) => {
+    if (!err) res.send(docs);
+    else console.log("Error to get data : " + err);
+  }).sort({ createdAt: -1 });
+};
+
 module.exports.createPost = async (req, res) => {
   const newPost = new PostModel({
     posterId: req.body.posterId,
@@ -61,6 +68,10 @@ module.exports.deletePost = async (req, res) => {
       res.status(200).json({ message: "Post Supprimé" });
     });
   });
+};
+
+module.exports.deleteUserPost = async (req, res) => {
+  await PostModel.find().where("posterId").equals(req.body.posterId);
 };
 
 module.exports.likePost = async (req, res) => {

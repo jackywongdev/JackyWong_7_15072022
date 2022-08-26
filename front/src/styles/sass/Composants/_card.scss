@@ -46,6 +46,9 @@
   }
 
   .card-right {
+    width: 550px;
+    max-width: 550px;
+    word-wrap: break-word;
     @media screen and(max-width: 590px) {
       margin-left: 18px;
     }
@@ -54,6 +57,7 @@
       justify-content: space-between;
       margin: 2px 0 4px;
       min-height: 35px;
+      max-width: 550px;
 
       @media screen and(max-width: 590px) {
         margin: 12px 0 14px;
@@ -65,6 +69,7 @@
 
       .pseudo {
         display: flex;
+        justify-content: space-around;
         margin-left: 15px;
         font-size: 1.1rem;
 
@@ -115,7 +120,7 @@
       }
     }
     p {
-      margin: 3px 0 9px;
+      margin: 3px 15px 9px;
       font-size: 1rem;
 
       @media screen and(max-width: 440px) {
@@ -132,12 +137,14 @@
       .button-container {
         .btn {
           background: $color-2;
+
           width: 240px;
           transform: translateY(-3px);
 
           &:hover {
             background: $color-1;
             width: 250px;
+            color: white;
             letter-spacing: 1px;
           }
         }
@@ -146,7 +153,7 @@
     .card-pic {
       width: 100%;
       border-radius: 6px;
-      margin-top: 12px;
+      margin-bottom: 15px;
       box-shadow: 0 0 3px rgba(51, 51, 51, 0.342);
     }
     iframe {
@@ -175,7 +182,6 @@
         img {
           height: 16px;
           width: 16px;
-          transform: translateY(3px);
         }
       }
     }
@@ -200,6 +206,7 @@
       .like-container {
         display: flex;
         align-items: center;
+        margin-right: 26px;
 
         span {
           font-size: 1.02rem;
@@ -260,6 +267,7 @@
         }
 
         span {
+          margin-right: 5px;
           font-size: 0.9rem;
           font-style: italic;
           font-family: $font-1;
@@ -287,8 +295,8 @@
         .edit-comment-form {
           margin-top: 14px;
           label {
-            background: $white;
-            color: $color-1;
+            background: $color-2;
+            color: $black;
             padding: 6px 12px 5px;
             border-radius: 20px 20px 20px 6px;
             cursor: pointer;
@@ -297,6 +305,8 @@
             font-family: $font-3;
 
             &:hover {
+              background-color: $color-1;
+              color: white;
               transform: scale(1.05);
             }
           }
@@ -331,11 +341,13 @@
             }
             input[type="submit"] {
               background: $color-2;
+              color: black;
               width: inherit;
               transition: 0.2s;
 
               &:hover {
                 width: inherit;
+                color: white;
                 background: $color-1;
               }
             }
@@ -368,6 +380,7 @@
 
         &:hover {
           background: $color-1;
+          color: white;
           letter-spacing: 2px;
           width: 130px;
         }
@@ -400,6 +413,10 @@
     }
     .button-container {
       text-align: right;
+      img:hover {
+        background-color: $color-1;
+        color: white;
+      }
 
       button {
         margin: 0;

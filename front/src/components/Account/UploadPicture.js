@@ -21,16 +21,20 @@ const UploadPicture = () => {
   return (
     <>
       <form action="" className="upload-pic" onSubmit={handlePicture}>
-        <label htmlFor="file"></label>
-        <input
-          type="file"
-          id="file"
-          name="file"
-          accept=".jpg, .jpeg, .png"
-          onChange={(e) => setFile(e.target.files[0])}
-        />
+        <div className="choose-container">
+          <input
+            className="choose"
+            type="file"
+            id="file"
+            name="file"
+            accept=".jpg, .jpeg, .png"
+            onChange={(e) => setFile(e.target.files[0])}
+          />
+        </div>
         <br />
-        <input type="submit" value="Envoyer" />
+        <div className="send-container">
+          <input className="send" type="submit" value="Envoyer" />
+        </div>
       </form>
     </>
   );

@@ -5,9 +5,11 @@ const multer = require("../middleware/upload.post");
 //ajouté le midlleware auth plus tard
 //post
 router.get("/", postController.readPost);
+router.get("/user-posts/", postController.readUserPosts);
 router.post("/", multer, postController.createPost);
 router.put("/:id", multer, postController.updatePost);
 router.delete("/:id", postController.deletePost);
+router.get("/delete-user-post", postController.deleteUserPost);
 router.patch("/like-post/:id", postController.likePost);
 router.patch("/unlike-post/:id", postController.unlikePost);
 

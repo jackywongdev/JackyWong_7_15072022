@@ -4,10 +4,10 @@ import NewPostForm from "../Home/Post/NewPostForm";
 
 const HomeContent = () => {
   return (
-    <div>
+    <>
       <NewPostForm />
       <Thread />
-    </div>
+    </>
   );
 };
 
