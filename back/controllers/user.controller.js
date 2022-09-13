@@ -1,6 +1,6 @@
 const UserModel = require("../models/user.model");
-const PostModem = require("../models/post.model");
-const ObjectID = require("mongoose").Types.ObjectId;
+const PostModel = require("../models/post.model");
+const ObjectId = require("mongoose").Types.ObjectId;
 const fs = require("fs");
 require("dotenv").config();
 
@@ -11,7 +11,7 @@ module.exports.getUsers = async (req, res) => {
 
 module.exports.userInfo = (req, res) => {
   console.log(req.params);
-  if (!ObjectID.isValid(req.params.id))
+  if (!ObjectId.isValid(req.params.id))
     return res.status(400).send("ID unknown:" + req.params.id);
   UserModel.findById(req.params.id, (err, docs) => {
     if (!err) res.send(docs);
@@ -40,85 +40,17 @@ module.exports.updateUserPicture = async (req, res) => {
 };
 
 module.exports.deleteUser = async (req, res) => {
-  if (!ObjectID.isValid(req.params.id))
-    return res.status(400).send("ID unknown: " + req.params.id);
-
-  await PostModel.find({ posterId: req.body.id });
-  PostModel.deleteMany({ posterId: req.body.id })
-    .then((res) => {
-      console.log(res);
-      res.status(200).json({ message: "Posts Supprimé" });
-    })
-    .catch((err) => console.log(err));
-
-  UserModel.findById({ _id: req.params.id }).then((user) => {
-    const filename = user.picture.split("/images/profil/")[1];
-    fs.unlink(`images/profil/${filename}`, () => {
-      UserModel.deleteOne({ _id: req.params.id }).exec();
-      res.status(200).json({ message: "Utilisateur Supprimé" });
+  if (!ObjectId.isValid(req.params.id))
+    return res.status(400).send("ID unknown:" + req.params.id);
+  try {
+    await UserModel.findById({ _id: req.params.id }).then((user) => {
+      const filename = user.picture.split("/images/profil/")[1];
+      fs.unlink(`images/profil/${filename}`, () => {
+        UserModel.deleteOne({ _id: req.params.id }).exec();
+        res.status(200).json({ message: "Utilisateur Supprimé" });
+      });
     });
-  });
-};
-module.exports.follow = async (req, res) => {
-  if (
-    !ObjectID.isValid(req.params.id) ||
-    !ObjectID.isValid(req.body.idToFollow)
-  )
-    return res.status(400).send("ID unknown : " + req.params.id);
-
-  try {
-    // add to the follower list
-    await UserModel.findByIdAndUpdate(
-      req.params.id,
-      { $addToSet: { following: req.body.idToFollow } },
-      { new: true, upsert: true },
-      (err, docs) => {
-        if (!err) res.status(201).json(docs);
-        else return res.status(400).jsos(err);
-      }
-    );
-    // add to following list
-    await UserModel.findByIdAndUpdate(
-      req.body.idToFollow,
-      { $addToSet: { followers: req.params.id } },
-      { new: true, upsert: true },
-      (err, docs) => {
-        // if (!err) res.status(201).json(docs);
-        if (err) return res.status(400).jsos(err);
-      }
-    );
-  } catch (err) {
-    return res.status(500).json({ message: err });
-  }
-};
-
-module.exports.unfollow = async (req, res) => {
-  if (
-    !ObjectID.isValid(req.params.id) ||
-    !ObjectID.isValid(req.body.idToUnfollow)
-  )
-    return res.status(400).send("ID unknown : " + req.params.id);
-
-  try {
-    await UserModel.findByIdAndUpdate(
-      req.params.id,
-      { $pull: { following: req.body.idToUnfollow } },
-      { new: true, upsert: true },
-      (err, docs) => {
-        if (!err) res.status(201).json(docs);
-        else return res.status(400).jsos(err);
-      }
-    );
-    // remove to following list
-    await UserModel.findByIdAndUpdate(
-      req.body.idToUnfollow,
-      { $pull: { followers: req.params.id } },
-      { new: true, upsert: true },
-      (err, docs) => {
-        if (err) return res.status(400).jsos(err);
-      }
-    );
-  } catch (err) {
-    return res.status(500).json({ message: err });
+  } catch {
+    return res.status(400).send(err);
   }
 };

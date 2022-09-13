@@ -1,19 +1,12 @@
 const PostModel = require("../models/post.model");
 const UserModel = require("../models/user.model");
-const ObjectID = require("mongoose").Types.ObjectId;
+const ObjectId = require("mongoose").Types.ObjectId;
 const fs = require("fs");
 
 //post
 
 module.exports.readPost = (req, res) => {
   PostModel.find((err, docs) => {
-    if (!err) res.send(docs);
-    else console.log("Error to get data : " + err);
-  }).sort({ createdAt: -1 });
-};
-
-module.exports.readUserPosts = (req, res) => {
-  PostModel.find({ posterId: req.body.posterId }, (err, docs) => {
     if (!err) res.send(docs);
     else console.log("Error to get data : " + err);
   }).sort({ createdAt: -1 });
@@ -37,7 +30,7 @@ module.exports.createPost = async (req, res) => {
 };
 
 module.exports.updatePost = async (req, res) => {
-  if (!ObjectID.isValid(req.params.id))
+  if (!ObjectId.isValid(req.params.id))
     return res.status(400).send("ID unknown:" + req.params.id);
 
   const postObject = { message: req.body.message };
@@ -45,7 +38,7 @@ module.exports.updatePost = async (req, res) => {
   try {
     await PostModel.findByIdAndUpdate(
       req.params.id,
-      { $set: { ...postObject } },
+      { $set: postObject },
       { new: true, upsert: true },
       (err, docs) => {
         if (!err) res.send(docs);
@@ -58,7 +51,7 @@ module.exports.updatePost = async (req, res) => {
 };
 
 module.exports.deletePost = async (req, res) => {
-  if (!ObjectID.isValid(req.params.id))
+  if (!ObjectId.isValid(req.params.id))
     return res.status(400).send("ID unknown:" + req.params.id);
   //supprimer l'image en premier avant de supprimer le post
   await PostModel.findById({ _id: req.params.id }).then((post) => {
@@ -70,12 +63,50 @@ module.exports.deletePost = async (req, res) => {
   });
 };
 
-module.exports.deleteUserPost = async (req, res) => {
-  await PostModel.find().where("posterId").equals(req.body.posterId);
+module.exports.deleteUserPosts = async (req, res) => {
+  if (!ObjectId.isValid(req.params.id))
+    return res.status(400).send("ID unknown:" + req.params.id);
+  try {
+    await PostModel.deleteMany({ posterId: req.body.posterId }),
+      res.status(200).json({ message: "Posts Supprimé" });
+  } catch {
+    return res.status(400).send(err);
+  }
+};
+
+module.exports.deleteUserComments = async (req, res) => {
+  if (!ObjectId.isValid(req.params.id))
+    return res.status(400).send("ID unknown:" + req.params.id);
+  try {
+    const data = await PostModel.find({
+      "comments.commenterId": req.body.commenterId,
+    });
+
+    for (let i = 0; i < data.length; i++) {
+      await PostModel.findByIdAndUpdate(
+        data[i]._id,
+        {
+          $pull: {
+            comments: {
+              commenterId: req.body.commenterId,
+            },
+          },
+        },
+        { new: true },
+        (err, docs) => {
+          if (err) return res.status(400).send(err);
+        }
+      );
+    }
+  } catch {
+    return res.status(400).send(err);
+  } finally {
+    return res.status(200).send();
+  }
 };
 
 module.exports.likePost = async (req, res) => {
-  if (!ObjectID.isValid(req.params.id))
+  if (!ObjectId.isValid(req.params.id))
     return res.status(400).send("ID unknown:" + req.params.id);
   try {
     await PostModel.findByIdAndUpdate(
@@ -101,7 +132,7 @@ module.exports.likePost = async (req, res) => {
 };
 
 module.exports.unlikePost = async (req, res) => {
-  if (!ObjectID.isValid(req.params.id))
+  if (!ObjectId.isValid(req.params.id))
     return res.status(400).send("ID unknown:" + req.params.id);
   try {
     await PostModel.findByIdAndUpdate(
@@ -129,7 +160,7 @@ module.exports.unlikePost = async (req, res) => {
 //comment
 
 module.exports.commentPost = (req, res) => {
-  if (!ObjectID.isValid(req.params.id))
+  if (!ObjectId.isValid(req.params.id))
     return res.status(400).send("ID unknown:" + req.params.id);
   try {
     return PostModel.findByIdAndUpdate(
@@ -156,7 +187,7 @@ module.exports.commentPost = (req, res) => {
 };
 
 module.exports.editCommentPost = (req, res) => {
-  if (!ObjectID.isValid(req.params.id))
+  if (!ObjectId.isValid(req.params.id))
     return res.status(400).send("ID unknown:" + req.params.id);
   try {
     return PostModel.findById(req.params.id, (err, docs) => {
@@ -176,7 +207,7 @@ module.exports.editCommentPost = (req, res) => {
 };
 
 module.exports.deleteCommentPost = (req, res) => {
-  if (!ObjectID.isValid(req.params.id))
+  if (!ObjectId.isValid(req.params.id))
     return res.status(400).send("ID unknown:" + req.params.id);
   try {
     return PostModel.findByIdAndUpdate(

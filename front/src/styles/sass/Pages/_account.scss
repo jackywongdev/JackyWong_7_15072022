@@ -1,12 +1,17 @@
 .account-page {
   display: flex;
-}
-
-.account-container {
-  display: flex;
-  justify-items: center;
-  margin: auto;
-  @media screen and(max-width: 632px) {
+  justify-content: center;
+  .vertical-center {
+    display: flex;
+    margin: 0;
+    position: absolute;
+    top: 50%;
+    transform: translateY(-50%);
+  }
+  @media screen and(max-width: 880px) {
+    margin-left: 200px;
+  }
+  @media screen and(max-width: 740px) {
     display: block;
   }
   h1 {
@@ -15,20 +20,30 @@
   }
 
   .left-container {
-    display: block;
+    display: flex;
+    margin: auto;
     justify-content: center;
     flex-direction: column;
+    width: 400px;
     img {
       width: 200px;
       justify-content: center;
+    }
+    @media screen and(max-width: 740px) {
+      img {
+        width: 400px;
+      }
     }
   }
 
   .picture-update-container {
     display: block;
-    flex-direction: column;
   }
 
+  .right-container {
+    width: 400px;
+    margin: auto;
+  }
   .account-delete-container {
     display: block;
     flex-direction: column;

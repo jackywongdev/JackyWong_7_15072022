@@ -17,7 +17,7 @@ const Card = ({ post }) => {
 
   const updateItem = () => {
     if (textUpdate) {
-      dispatch(updatePost(post, textUpdate));
+      dispatch(updatePost(post._id, textUpdate));
     }
     setIsUpdated(false);
   };
@@ -52,7 +52,7 @@ const Card = ({ post }) => {
               </div>
               <span>{dateParser(post.createdAt)}</span>
             </div>
-            {isUpdated === false && <p>{post.message}</p>}
+            {isUpdated === false && <p className="text-area">{post.message}</p>}
             {isUpdated && (
               <div className="update-post">
                 <textarea
@@ -66,13 +66,17 @@ const Card = ({ post }) => {
                 </div>
               </div>
             )}
+
             {post.picture && (
               <img src={post.picture} alt="card-pic" className="card-pic" />
             )}
+
             {post.video && (
               <iframe
                 width="500"
                 height="300"
+                marginHeight="3px"
+                marginWidth="5px"
                 src={post.video}
                 frameBorder="0"
                 allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
@@ -80,6 +84,7 @@ const Card = ({ post }) => {
                 title={post._id}
               ></iframe>
             )}
+
             {userData.isAdmin === true || userData._id === post.posterId ? (
               <div className="button-container">
                 <div onClick={() => setIsUpdated(!isUpdated)}>

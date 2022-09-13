@@ -29,18 +29,29 @@ export default function HeaderBar() {
   return (
     <>
       {uid ? (
-        <Header>
-          <>
-            <div className="logo-container">
-              <LogoutOutlined className="logout-icon" onClick={logout} />
-              <p>Se déconnecter</p>
+        <Header
+          style={{
+            position: "fixed",
+            zIndex: 1,
+            width: "100%",
+          }}
+        >
+          <div className="header-container">
+            <div className="groupomania-header">
+              <img src="./images/groupomania/logo.png" alt="logo groupomania" />
             </div>
+
             <div className="welcome-container">
-              <Avatar size="large" src={userData.picture} />) (
-              <div className="log-page"></div>)
+              <Avatar size="large" src={userData.picture} />
+              <div className="log-page"></div>
               <h1>Bienvenue {userData.pseudo}</h1>
+
+              <div className="logo-container">
+                <LogoutOutlined className="logout-icon" onClick={logout} />
+                <p>Se déconnecter</p>
+              </div>
             </div>
-          </>
+          </div>
         </Header>
       ) : (
         ""
