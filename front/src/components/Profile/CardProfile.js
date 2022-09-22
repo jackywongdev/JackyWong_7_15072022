@@ -12,13 +12,13 @@ const CardProfile = ({ post }) => {
   const [isUpdated, setIsUpdated] = useState(false);
   const [textUpdate, setTextUpdate] = useState(null);
   const [showComments, setShowComments] = useState(false);
-  const userData = useSelector((state) => state.userReducer);
   const usersData = useSelector((state) => state.usersReducer);
+  const userData = useSelector((state) => state.userReducer);
   const dispatch = useDispatch();
 
   const updateItem = () => {
     if (textUpdate) {
-      dispatch(updatePost(post, textUpdate));
+      dispatch(updatePost(post._id, textUpdate));
     }
     setIsUpdated(false);
   };
@@ -28,31 +28,37 @@ const CardProfile = ({ post }) => {
   }, [usersData]);
 
   return (
-    <li className="card-container" key={post._id}>
+    <li className="card-container" key={post.posterId}>
       {isLoading ? (
-        <Spin />
+        <div className="spinner">
+          <Spin style={{ justifyContent: "center" }} />
+        </div>
       ) : (
         <>
-          <div className="card-left">
-            <img
-              src={
-                !isEmpty(usersData[0]) &&
-                usersData.find((user) => user._id === post.posterId).picture
-              }
-              alt="poster-pic"
-            />
-          </div>
-          <div className="card-right">
-            <div className="card-header">
-              <div className="pseudo">
+          <div className="card-header">
+            <div className="top-container">
+              <div className="user-container">
+                <img
+                  src={
+                    !isEmpty(usersData[0]) &&
+                    usersData.find((user) => user._id === post.posterId).picture
+                  }
+                  alt="poster-pic"
+                />
                 <h3>
                   {!isEmpty(usersData[0]) &&
-                    usersData.find((user) => user._id === post.posterId).pseudo}
+                    usersData.find((user) => user._id === post.posterId)
+                      ?.pseudo}
                 </h3>
               </div>
-              <span>{dateParser(post.createdAt)}</span>
+              <div className="post-timestamp">
+                <span>{dateParser(post.createdAt)}</span>
+              </div>
             </div>
-            {isUpdated === false && <p>{post.message}</p>}
+          </div>
+
+          <div className="card-content">
+            {isUpdated === false && <p className="text-area">{post.message}</p>}
             {isUpdated && (
               <div className="update-post">
                 <textarea
@@ -66,20 +72,23 @@ const CardProfile = ({ post }) => {
                 </div>
               </div>
             )}
+
             {post.picture && (
               <img src={post.picture} alt="card-pic" className="card-pic" />
             )}
+
             {post.video && (
-              <iframe
-                width="500"
-                height="300"
-                src={post.video}
-                frameBorder="0"
-                allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
-                allowFullScreen
-                title={post._id}
-              ></iframe>
+              <div className="wrapper">
+                <iframe
+                  src={post.video}
+                  frameBorder="0"
+                  allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+                  allowFullScreen
+                  title={post._id}
+                ></iframe>
+              </div>
             )}
+
             {userData.isAdmin === true || userData._id === post.posterId ? (
               <div className="button-container">
                 <div onClick={() => setIsUpdated(!isUpdated)}>
@@ -90,6 +99,7 @@ const CardProfile = ({ post }) => {
             ) : (
               ""
             )}
+
             <div className="card-footer">
               <div className="comment-icon">
                 <img

@@ -7,18 +7,26 @@
 
 .ant-menu-inline {
   width: 146px;
-  @media screen and(max-width: 1024px) {
-  }
-}
-
-.navbar-container {
-  display: flex;
-  justify-content: center;
 }
 
 .navbar-menu {
   display: flex;
   height: 0;
-  margin-top: 64px;
-  width: 1200px;
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  width: 1330px;
+  margin: 116px auto;
+  background-color: #e6f7ff;
+  @media screen and (max-width: 1350px) {
+    margin: 116px auto 0 -57px;
+  }
+  @media screen and (max-width: 1200px) {
+    margin: 82px auto 0 -57px;
+  }
+  @media screen and (max-width: 440px) {
+    margin: 82px auto 0 -57px;
+  }
 }

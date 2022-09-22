@@ -6,6 +6,7 @@ import { updatePost } from "../../../redux/actions/post.actions";
 import DeleteCard from "./DeleteCard";
 import CardComments from "./CardComments";
 import { Spin } from "antd";
+
 const Card = ({ post }) => {
   const [isLoading, setIsLoading] = useState(true);
   const [isUpdated, setIsUpdated] = useState(false);
@@ -29,29 +30,34 @@ const Card = ({ post }) => {
   return (
     <li className="card-container" key={post.posterId}>
       {isLoading ? (
-        <Spin />
+        <div className="spinner">
+          <Spin style={{ justifyContent: "center" }} />
+        </div>
       ) : (
         <>
-          <div className="card-left">
-            <img
-              src={
-                !isEmpty(usersData[0]) &&
-                usersData.find((user) => user._id === post.posterId).picture
-              }
-              alt="poster-pic"
-            />
-          </div>
-          <div className="card-right">
-            <div className="card-header">
-              <div className="pseudo">
+          <div className="card-header">
+            <div className="top-container">
+              <div className="user-container">
+                <img
+                  src={
+                    !isEmpty(usersData[0]) &&
+                    usersData.find((user) => user._id === post.posterId).picture
+                  }
+                  alt="poster-pic"
+                />
                 <h3>
                   {!isEmpty(usersData[0]) &&
                     usersData.find((user) => user._id === post.posterId)
                       ?.pseudo}
                 </h3>
               </div>
-              <span>{dateParser(post.createdAt)}</span>
+              <div className="post-timestamp">
+                <span>{dateParser(post.createdAt)}</span>
+              </div>
             </div>
+          </div>
+
+          <div className="card-content">
             {isUpdated === false && <p className="text-area">{post.message}</p>}
             {isUpdated && (
               <div className="update-post">
@@ -72,17 +78,15 @@ const Card = ({ post }) => {
             )}
 
             {post.video && (
-              <iframe
-                width="500"
-                height="300"
-                marginHeight="3px"
-                marginWidth="5px"
-                src={post.video}
-                frameBorder="0"
-                allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
-                allowFullScreen
-                title={post._id}
-              ></iframe>
+              <div className="wrapper">
+                <iframe
+                  src={post.video}
+                  frameBorder="0"
+                  allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+                  allowFullScreen
+                  title={post._id}
+                ></iframe>
+              </div>
             )}
 
             {userData.isAdmin === true || userData._id === post.posterId ? (
@@ -95,6 +99,7 @@ const Card = ({ post }) => {
             ) : (
               ""
             )}
+
             <div className="card-footer">
               <div className="comment-icon">
                 <img

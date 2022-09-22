@@ -21,8 +21,7 @@ export default function postReducer(state = initialState, action) {
             ...post,
             likers: [action.payload.userId, ...post.likers],
           };
-        }
-        return post;
+        } else return post;
       });
     case UNLIKE_POST:
       return state.map((post) => {
@@ -31,8 +30,7 @@ export default function postReducer(state = initialState, action) {
             ...post,
             likers: post.likers.filter((id) => id !== action.payload.userId),
           };
-        }
-        return post;
+        } else return post;
       });
     case UPDATE_POST:
       return state.map((post) => {

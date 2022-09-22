@@ -15,14 +15,16 @@ export default function HeaderBar() {
     }
   };
   const logout = async () => {
-    await axios({
-      method: "get",
-      url: `${process.env.REACT_APP_API_URL}/api/user/logout`,
-      withCredentials: true,
-    })
-      .then(() => removeCookie("jwt"))
-      .catch((err) => console.log(err));
-    window.location = "/";
+    if (window.confirm("Êtes-vous sur de vouloir vous deconnectez ?")) {
+      await axios({
+        method: "get",
+        url: `${process.env.REACT_APP_API_URL}/api/user/logout`,
+        withCredentials: true,
+      })
+        .then(() => removeCookie("jwt"))
+        .catch((err) => console.log(err));
+      window.location = "/";
+    }
   };
   const userData = useSelector((state) => state.userReducer);
 
@@ -40,14 +42,21 @@ export default function HeaderBar() {
             <div className="groupomania-header">
               <img src="./images/groupomania/logo.png" alt="logo groupomania" />
             </div>
+            <div className="groupomania-small-header">
+              <img
+                src="./images/groupomania/icon.png"
+                alt="small logo groupomania"
+              />
+            </div>
 
             <div className="welcome-container">
-              <Avatar size="large" src={userData.picture} />
-              <div className="log-page"></div>
-              <h1>Bienvenue {userData.pseudo}</h1>
+              <div className="header-user-container">
+                <Avatar size="large" src={userData.picture} />
 
-              <div className="logo-container">
-                <LogoutOutlined className="logout-icon" onClick={logout} />
+                <h1>Bienvenue {userData.pseudo}</h1>
+              </div>
+              <div className="logout-container" onClick={logout}>
+                <LogoutOutlined className="logout-icon" />
                 <p>Se déconnecter</p>
               </div>
             </div>

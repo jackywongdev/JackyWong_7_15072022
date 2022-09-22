@@ -111,10 +111,11 @@ module.exports.likePost = async (req, res) => {
   try {
     await PostModel.findByIdAndUpdate(
       req.params.id,
-      { $addToSet: { likers: req.params.id } },
+      { $addToSet: { likers: req.body.id } },
       { new: true },
       (err, docs) => {
-        if (err) return res.status(400).send(err);
+        if (!err) res.send(docs);
+        else return res.status(400).send(err);
       }
     );
     await UserModel.findByIdAndUpdate(
@@ -122,8 +123,7 @@ module.exports.likePost = async (req, res) => {
       { $addToSet: { likes: req.params.id } },
       { new: true },
       (err, docs) => {
-        if (!err) res.send(docs);
-        else return res.status(400).send(err);
+        if (err) return res.status(400).send(err);
       }
     );
   } catch (err) {
@@ -137,7 +137,7 @@ module.exports.unlikePost = async (req, res) => {
   try {
     await PostModel.findByIdAndUpdate(
       req.params.id,
-      { $pull: { likers: req.params.id } },
+      { $pull: { likers: req.body.id } },
       { new: true },
       (err, docs) => {
         if (err) return res.status(400).send(err);

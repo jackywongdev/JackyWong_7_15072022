@@ -12,7 +12,5 @@ router.get("/", userController.getUsers);
 router.get("/:id", userController.userInfo);
 router.put("/upload", multer, userController.updateUserPicture);
 router.delete("/:id", userController.deleteUser);
-router.patch("/follow/:id", userController.follow);
-router.patch("/unfollow/:id", userController.unfollow);
 
 module.exports = router;

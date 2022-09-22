@@ -1,0 +1,25 @@
+.profile-page {
+  margin-top: 80px;
+}
+
+.thread-container {
+  no-post {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin: 0 auto;
+    width: 100%;
+    h1 {
+      font-size: 1rem;
+    }
+  }
+}
+
+.no-post {
+  display: flex;
+  justify-content: center;
+  margin: 100px 50px;
+  @media screen and(max-width: 570px) {
+    margin: 100px 34px;
+  }
+}

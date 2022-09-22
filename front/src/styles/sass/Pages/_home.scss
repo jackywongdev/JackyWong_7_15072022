@@ -1,6 +1,13 @@
 .home-container {
+  background-color: #e6f7ff;
   display: block;
   position: inherit;
-  margin: 60px 60px;
+  margin: 80px 40px;
   justify-content: center;
+  @media screen and(max-width: 1200px) {
+    margin: 40px 30px;
+  }
+  @media screen and(max-width: 570px) {
+    margin: 40px 0px;
+  }
 }

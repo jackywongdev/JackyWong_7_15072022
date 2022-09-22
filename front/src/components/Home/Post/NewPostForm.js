@@ -65,15 +65,13 @@ const NewPostForm = () => {
   }, [userData, message, video]);
 
   return (
-    <div className="post-container">
+    <div className="new-post-container">
       {isLoading ? (
-        <Spin />
+        <div className="spinner">
+          <Spin style={{ justifyContent: "center" }} />
+        </div>
       ) : (
         <>
-          <div className="user-info">
-            <img src={userData.picture} alt="user-img" />
-          </div>
-
           <div className="post-form">
             <textarea
               name="message"
@@ -83,34 +81,36 @@ const NewPostForm = () => {
               value={message}
             />
             {message || postPicture || video.length > 20 ? (
-              <li className="card-container">
-                <div className="card-left">
-                  <img src={userData.picture} alt="user-pic" />
-                </div>
-                <div className="card-right">
-                  <div className="card-header">
-                    <div className="pseudo">
-                      <h3>{userData.pseudo}</h3>
-                    </div>
-                    <span>{timestampParser(Date.now())}</span>
+              <li className="new-card-container">
+                <div className="new-top-container">
+                  <div className="new-card-left">
+                    <img src={userData.picture} alt="new-user-pic" />
+                    <h3>{userData.pseudo}</h3>
                   </div>
-                  <div className="content">
+
+                  <span>{timestampParser(Date.now())}</span>
+                </div>
+
+                <div className="new-card-right">
+                  <div className="new-content">
                     <p>{message}</p>
                     <img src={postPicture} alt="" />
                     {video && (
-                      <iframe
-                        src={video}
-                        frameBorder="0"
-                        allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
-                        allowFullScreen
-                        title={video}
-                      ></iframe>
+                      <div className="wrapper">
+                        <iframe
+                          src={video}
+                          frameBorder="0"
+                          allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+                          allowFullScreen
+                          title={video}
+                        ></iframe>
+                      </div>
                     )}
                   </div>
                 </div>
               </li>
             ) : null}
-            <div className="footer-form">
+            <div className="new-footer-form">
               <div className="icon">
                 {isEmpty(video) && (
                   <>
@@ -121,6 +121,7 @@ const NewPostForm = () => {
                       name="file"
                       accept=".jpg, .jpeg, .png"
                       onChange={(e) => handlePicture(e)}
+                      autocomplete="off"
                     />
                   </>
                 )}

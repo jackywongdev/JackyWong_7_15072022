@@ -67,6 +67,7 @@ const CardComments = ({ post }) => {
             onChange={(e) => setText(e.target.value)}
             value={text}
             placeholder="Laisser un commentaire"
+            autocomplete="off"
           />
           <br />
           <input type="submit" value="Envoyer" />

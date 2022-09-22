@@ -44,15 +44,23 @@ const App = () => {
   return (
     <>
       <UidContext.Provider value={uid}>
-        <Layout>
-          <Layout>
+        <Layout
+          style={{
+            background: "#e6f7ff",
+          }}
+        >
+          <Layout
+            style={{
+              background: "#e6f7ff",
+            }}
+          >
             <HeaderBar />
             <NavBar />
             <Content
               style={{
                 margin: "24px 16px",
                 padding: 24,
-                background: "#fff",
+                background: "#e6f7ff",
               }}
             >
               <Routes>

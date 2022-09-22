@@ -53,6 +53,7 @@ const EditDeleteComment = ({ comment, postId }) => {
             name="text"
             onChange={(e) => setText(e.target.value)}
             defaultValue={comment.text}
+            autocomplete="off"
           />
           <br />
           <div className="btn">
@@ -65,7 +66,11 @@ const EditDeleteComment = ({ comment, postId }) => {
             >
               <img src="./images/icons/trash.svg" alt="delete" />
             </span>
-            <input type="submit" value="Valider modification" />
+            <input
+              type="submit"
+              value="Valider modification"
+              autocomplete="off"
+            />
           </div>
         </form>
       )}

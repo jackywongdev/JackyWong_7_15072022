@@ -4,37 +4,70 @@
   flex-direction: row-reverse;
   padding: 0;
   margin: 0;
+  background: $color-3;
   h1 {
     margin-right: 70px;
     padding: 0;
     color: white;
+    &:hover {
+      cursor: pointer;
+    }
   }
 }
 
 .header-container {
   display: flex;
   width: 1200px;
+  height: 64px;
   justify-content: space-between;
   margin: auto;
 }
 
-.logo-container {
-  @media screen and(max-width: 690px) {
-    display: flex;
-    flex-direction: row-reverse;
+.header-user-container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+
+  @media screen and (max-width: 703px) {
+    display: none;
   }
-  svg {
-    margin-left: 15px;
+  img {
+    &:hover {
+      cursor: pointer;
+      opacity: 0.9;
+    }
+  }
+  span {
+    margin-right: 15px;
   }
 }
 
-.logo-container {
-  display: block;
+.logout-container {
+  display: flex;
+  flex-direction: row-reverse;
   justify-content: center;
   align-items: center;
-  margin: 0;
-  padding: 10px 25px 0 0;
+  margin-bottom: 5px;
+  margin-right: 5px;
+  @media screen and(max-width: 469px) {
+    margin-right: 5px;
+  }
+  &:hover {
+    cursor: pointer;
+  }
+
   color: white;
+  @media screen and(max-width: 469px) {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+  }
+  svg {
+    margin-left: 15px;
+    @media screen and(max-width: 469px) {
+      margin-right: 10px;
+    }
+  }
   p {
     margin: 0;
     padding: 0;
@@ -44,15 +77,31 @@
 
 .groupomania-header {
   img {
+    height: 65px;
+    &:hover {
+      cursor: pointer;
+    }
+    @media screen and (max-width: 431px) {
+      display: none;
+    }
+  }
+}
+
+.groupomania-small-header {
+  img {
+    display: none;
     height: 64px;
+    display: none;
+    @media screen and (max-width: 431px) {
+      display: inline;
+      position: absolute;
+      left: 0%;
+    }
   }
 }
 
 .logout-icon {
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  margin: 0;
+  margin-top: 4px;
   padding: 0;
   font-size: 20px;
   color: white;
@@ -62,4 +111,8 @@
   display: flex;
   justify-content: center;
   align-items: center;
+  margin-right: 15px;
+  @media screen and(max-width: 690px) {
+    margin-right: 15px;
+  }
 }

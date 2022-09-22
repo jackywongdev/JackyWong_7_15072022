@@ -30,6 +30,7 @@ const NavBar = () => {
               onClick={toggleCollapsed}
               style={{
                 marginBottom: 16,
+                opacity: 0,
               }}
             >
               {collapsed ? <MenuUnfoldOutlined /> : <MenuFoldOutlined />}

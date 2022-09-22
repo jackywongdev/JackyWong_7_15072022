@@ -20,22 +20,26 @@ const UploadPicture = () => {
 
   return (
     <>
-      <form action="" className="upload-pic" onSubmit={handlePicture}>
-        <div className="choose-container">
-          <input
-            className="choose"
-            type="file"
-            id="file"
-            name="file"
-            accept=".jpg, .jpeg, .png"
-            onChange={(e) => setFile(e.target.files[0])}
-          />
-        </div>
-        <br />
-        <div className="send-container">
-          <input className="send" type="submit" value="Envoyer" />
-        </div>
-      </form>
+      <div className="upload-picture-form">
+        <form action="" className="upload-pic" onSubmit={handlePicture}>
+          <div className="choose-container">
+            <div className="icon">
+              <img src="./images/icons/picture.svg" alt="img" />
+              <input
+                className="choose"
+                type="file"
+                id="file-upload"
+                name="file"
+                accept=".jpg, .jpeg, .png"
+                onChange={(e) => setFile(e.target.files[0])}
+              />
+            </div>
+            <div className="btn-send">
+              <input className="send" type="submit" value="Envoyer"></input>
+            </div>
+          </div>
+        </form>
+      </div>
     </>
   );
 };
