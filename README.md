@@ -14,12 +14,17 @@ Votre directrice, Stéphanie, vient de signer un nouveau contrat avec Groupomani
 
 
 ## Langages
-- React
-- Node.js
 
+Back
+- Node
+- Express
 - MongoDB
-- Google Chrome 
-- Git Bash et Github
+
+Front
+- React
+- Redux
+- Ant Design
+- SASS 
 
 ## Scénario
 
