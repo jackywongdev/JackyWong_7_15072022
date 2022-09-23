@@ -54,4 +54,30 @@ il est obligatoire d’utiliser un framework front-end JavaScript. Comme on part
 pour la base de données, tu peux utiliser les outils de ton choix. Tu peux utiliser soit une base de données non relationnelle, comme mongoDB par exemple, soit une base de données relationnelle (en t’aidant d’un ORM si tu le souhaites) ;
 pense à bien fournir un README avec ton code, expliquant comment installer le site sur un nouveau poste.
 
+pour démarrer le projet:
+
+il faudra ce rendre dans le dossier .back/config créer un fichier .env et y mettre:
+
+PORT=5000
+CLIENT_URL=htpp://localhost:3000
+DB_USER_PASS=SuperAdmin:VeryComplicatedBecauseItsCool94400
+JWT_TOKEN="eyJhbGciOiJQUzUxMiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiIxMjM0NTY3ODkwIiwibmFtZSI6IkpvaG4gRG9lIiwiYWRtaW4iOnRydWUsImlhdCI6MTUxNjIzOTAyMn0.J5W09-rNx0pt5_HBiydR-vOluS6oD-RpYNa8PVWwMcBDQSXiw6-EPW8iSsalXPspGj3ouQjAnOP_4-zrlUUlvUIt2T79XyNeiKuooyIFvka3Y5NnGiOUBHWvWcWp4RcQFMBrZkHtJM23sB5D7Wxjx0-HFeNk-Y3UJgeJVhg5NaWXypLkC4y0ADrUBfGAxhvGdRdULZivfvzuVtv6AzW6NRuEE6DM9xpoWX_4here-yvLS2YPiBTZ8xbB3axdM99LhES-n52lVkiX5AWg2JJkEROZzLMpaacA_xlbUz_zbIaOaoqk8gB5oO7kI6sZej3QAdGigQy-hXiRnW_L98d4GQ"
+
+
+Pour la partie front il faudra ce rendre dans le dossierr front créer a la racine le fichier .env et y mettre:
+
+REACT_APP_API_URL=http://localhost:5000
+
+
+pour installer le projet ouvrir 2 terminaux 
+
+cd back
+npm install
+npm start
+
+cd front
+npm install
+npm start
+
+
 
